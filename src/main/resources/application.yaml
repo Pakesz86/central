@@ -1,0 +1,49 @@
+#security.basic.enabled=false
+#logging.level.org.springframework.web: TRACE
+#logging.level.org.hibernate: TRACE
+#
+#
+#spring.security.oauth2.client.registration.google.client-id=<your client id>
+#spring.security.oauth2.client.registration.google.client-secret=dev-0d0pu6wujp0nkcw5.eu.auth0.com
+app:
+  version: "@project:version@"
+
+spring:
+  application:
+    name: pakesz-demo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 600000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+security:
+  filter:
+    order: 10
+  jwt:
+    secret-key: e2aeddd40855e955d2ffc450f8b8e2c7e1c8fdc62f2ef86d1281575c9d9ca136
+    expiration-time: 3600000
+
+server:
+  address: 0.0.0.0
+  port: 8888
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:keystore.p12
+    key-store-password: Ares2330
+    key-alias: mykey
+
+cors:
+  allowedOrigins: "https://pakesz.com, https://95.85.160.58"
